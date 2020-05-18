@@ -1,4 +1,5 @@
 /+  *server, default-agent, verb
+::
 /=  tile-js
   /^  octs
   /;  as-octs:mimes:html
@@ -6,9 +7,11 @@
   /|  /js/
       /~  ~
   ==
+::
 /=  hud-png
   /^  (map knot @)
   /:  /===/app/hud/img  /_  /png/
+::
 =,  format
 ::
 |%
@@ -35,11 +38,12 @@
 %+  verb  |
 ^-  agent:gall
 =<
-|_  bol=bowl:gall
-+*  this  .
-    auxil-core  +>
-    aux  ~(. auxil-core bol)
-    def  ~(. (default-agent this %|) bol)
+  |_  bol=bowl:gall
+::
+  +*  this  .
+      auxil-core  +>
+      aux  ~(. auxil-core bol)
+      def  ~(. (default-agent this %|) bol)
 ::
   ++  on-init
     ^-  (quip card:agent:gall _this)
@@ -50,8 +54,10 @@
         [%pass /hud %agent [our.bol %launch] %poke launcha]
         [%pass / %arvo %b %wait (add now.bol ~s1)]
     ==
+::
   ++  on-save  !>(state)
   ++  on-load   ~&  'OK'  on-load:def
+::
   ++  on-poke
     |=  [=mark =vase]
     ^-  (quip card:agent:gall _this)
@@ -80,6 +86,7 @@
         (poke-json.aux !<(json vase))
         [cards this]
     ==
+::
   ++  on-watch
     |=  =wire
     ^-  (quip card _this)
@@ -90,9 +97,11 @@
         :_  this
         [%give %fact ~ %json !>((to-json.aux state))]~
     ==
+::
   ++  on-leave  on-leave:def
   ++  on-peek   on-peek:def
   ++  on-agent  on-agent:def
+::
   ++  on-arvo
     |=  [=wire =sign-arvo]
     ^-  (quip card _this)
@@ -118,118 +127,124 @@
     ?.  ?=(%bound +<.sign-arvo)
       (on-arvo:def wire sign-arvo)
     [~ this]
+::
   ++  on-fail   on-fail:def
 --
+:: auxillary door
 |_  bol=bowl:gall
-  ++  tarpsicord
-    |=  in=tarp
-    =/  days=tape   (weld (scow %ud d.in) " d ")
-    =/  hours=tape  (weld (scow %ud h.in) " hrs ")
-    =/  min=tape    (weld (scow %ud m.in) " min")
-    =/  timetape=tape  (weld days (weld hours min))
-    (crip timetape)
-  ++  poke-bh
-    |=  action=?(%base %home)
-    =/  o=@ta  (scot %p our.bol)
-    =/  n=@ta  (scot %da now.bol)
-    ^-  @uv
-    ?-  action
-        %base  .^(@uv %cz ~[o ~.base n])
-        %home  .^(@uv %cz ~[o ~.home n])
-    ==
-
-  ++  poke-lr
-    |=  [action=?(%life %rift) p=@p]
-    =/  n=@ta  (scot %da now.bol)
-    ::  lol pp
-    ::
-    =/  o=@ta  (scot %p p)
-    =/  me=@ta  (scot %p our.bol)
-    ?-  action
-        %life  .^((unit @ud) %j `path`~[me ~.lyfe n o])
-        %rift  .^((unit @ud) %j `path`~[me ~.ryft n o])
-    ==
-
-  ++  poke-json
-    |=  jon=json
-    =,  dejs:format
-    ^-  (quip card _state)
-    =|  p=@p
-    ?.  ?=(%o -.jon)
-      [~ state]
-    =/  top=tape  (trip (~(gut by ((om so) jon)) 'patp-query' ''))
-    ?~  top
-      :_  %=  state
-        oleef  ~
-        oreef  ~  ==
-      [%pass / %agent [our.bol %hud] %poke %update-hud !>(~)]~
-    ?:  =('~' i.top)
-      =/  cb=dime  (scan t.top crub:^so)
-      =.  p  `@p`+.cb
-      :_  %=  state
-          oleef  (poke-lr [%life p])
-          oreef  (poke-lr [%rift p])  ==
-      [%pass / %agent [our.bol %hud] %poke %update-hud !>(~)]~
-    =/  cb=dime  (scan top crub:^so)
+++  tarpsicord
+  |=  in=tarp
+  =/  days=tape   (weld (scow %ud d.in) " d ")
+  =/  hours=tape  (weld (scow %ud h.in) " hrs ")
+  =/  min=tape    (weld (scow %ud m.in) " min")
+  =/  timetape=tape  (weld days (weld hours min))
+  (crip timetape)
+::
+++  poke-bh
+  |=  action=?(%base %home)
+  =/  o=@ta  (scot %p our.bol)
+  =/  n=@ta  (scot %da now.bol)
+  ^-  @uv
+  ?-  action
+      %base  .^(@uv %cz ~[o ~.base n])
+      %home  .^(@uv %cz ~[o ~.home n])
+  ==
+::
+++  poke-lr
+  |=  [action=?(%life %rift) p=@p]
+  =/  n=@ta  (scot %da now.bol)
+  ::  lol pp
+  ::
+  =/  o=@ta  (scot %p p)
+  =/  me=@ta  (scot %p our.bol)
+  ?-  action
+      %life  .^((unit @ud) %j `path`~[me ~.lyfe n o])
+      %rift  .^((unit @ud) %j `path`~[me ~.ryft n o])
+  ==
+::
+++  poke-json
+  |=  jon=json
+  =,  dejs:format
+  ^-  (quip card _state)
+  =|  p=@p
+  ?.  ?=(%o -.jon)
+    [~ state]
+  =/  top=tape  (trip (~(gut by ((om so) jon)) 'patp-query' ''))
+  ?~  top
+    :_  %=  state
+      oleef  ~
+      oreef  ~  ==
+    [%pass / %agent [our.bol %hud] %poke %update-hud !>(~)]~
+  ?:  =('~' i.top)
+    =/  cb=dime  (scan t.top crub:^so)
     =.  p  `@p`+.cb
     :_  %=  state
         oleef  (poke-lr [%life p])
         oreef  (poke-lr [%rift p])  ==
     [%pass / %agent [our.bol %hud] %poke %update-hud !>(~)]~
+  =/  cb=dime  (scan top crub:^so)
+  =.  p  `@p`+.cb
+  :_  %=  state
+      oleef  (poke-lr [%life p])
+      oreef  (poke-lr [%rift p])  ==
+  [%pass / %agent [our.bol %hud] %poke %update-hud !>(~)]~
+::
 ++  poke-handle-http-request
-    |=  =inbound-request:eyre
-    =+  url=(parse-request-line url.request.inbound-request)
-    ?+  site.url  not-found:gen
-        [%'~hud' %js %tile ~]    (js-response:gen tile-js)
-    ::
-        [%'~hud' %img @t *]
-      =/  name=@t  i.t.t.site.url
-      =/  img  (~(get by hud-png) name)
-      ?~  img
-        not-found:gen
-      (png-response:gen (as-octs:mimes:html u.img))
-    ==
-  ++  uptime-check
-    |=  tempnow=tarp
-    ^-  tarp
-    =|  currup=tarp
-    ?:  =(bootup `tarp`[d=0 h=0 m=0 s=0 f=~])
-      =.  currup  [d=0 h=0 m=0 s=0 f=~]
-      `tarp`currup
-    =/  startmin=@ud  (add (mul d.bootup 1.440) (add (mul h.bootup 60) m.bootup))
-    =/  nowmin=@ud    (add (mul d.tempnow 1.440) (add (mul h.tempnow 60) m.tempnow))
-    =/  uptotal=@ud   ?:((gte nowmin startmin) (sub nowmin startmin) 0)
-    =/  da=@ud        (div uptotal 1.440)
-    =.  uptotal       (mod uptotal 1.440)
-    =/  ha=@ud        (div uptotal 60)
-    =.  uptotal       (mod (mod uptotal 1.440) 60)
-    =/  ma=@ud        uptotal
-    =.  currup  `tarp`[d=da h=ha m=ma s=0 f=~]
+  |=  =inbound-request:eyre
+  =+  url=(parse-request-line url.request.inbound-request)
+  ?+  site.url  not-found:gen
+      [%'~hud' %js %tile ~]    (js-response:gen tile-js)
+  ::
+      [%'~hud' %img @t *]
+    =/  name=@t  i.t.t.site.url
+    =/  img  (~(get by hud-png) name)
+    ?~  img
+      not-found:gen
+    (png-response:gen (as-octs:mimes:html u.img))
+  ==
+::  
+++  uptime-check
+  |=  tempnow=tarp
+  ^-  tarp
+  =|  currup=tarp
+  ?:  =(bootup `tarp`[d=0 h=0 m=0 s=0 f=~])
+    =.  currup  [d=0 h=0 m=0 s=0 f=~]
     `tarp`currup
-  ++  to-json
-    |=  stat=_state
-    ^-  json
-    %-  pairs:enjs:format
-    :~  :+  %base
-            %s
-        (scot %uv baseh.stat)
-        :+  %home
-            %s
-        (scot %uv homeh.stat)
-        :+  %uptime
-            %s
-        uptime.stat
-        :+  %life
-            %s
-        ?~(leef.stat '' (scot %ud u.+.leef.stat))
-        :+  %rift
-            %s
-        ?~(reef.stat '' (scot %ud u.+.reef.stat))
-        :+  %olife
-            %s
-        ?~(oleef.stat '' (scot %ud u.+.leef.stat))
-        :+  %orift
-            %s
-        ?~(oreef.stat '' (scot %ud u.+.reef.stat))
-    ==
+  =/  startmin=@ud  (add (mul d.bootup 1.440) (add (mul h.bootup 60) m.bootup))
+  =/  nowmin=@ud    (add (mul d.tempnow 1.440) (add (mul h.tempnow 60) m.tempnow))
+  =/  uptotal=@ud   ?:((gte nowmin startmin) (sub nowmin startmin) 0)
+  =/  da=@ud        (div uptotal 1.440)
+  =.  uptotal       (mod uptotal 1.440)
+  =/  ha=@ud        (div uptotal 60)
+  =.  uptotal       (mod (mod uptotal 1.440) 60)
+  =/  ma=@ud        uptotal
+  =.  currup  `tarp`[d=da h=ha m=ma s=0 f=~]
+  `tarp`currup
+::
+++  to-json
+  |=  stat=_state
+  ^-  json
+  %-  pairs:enjs:format
+  :~  :+  %base
+          %s
+      (scot %uv baseh.stat)
+      :+  %home
+          %s
+      (scot %uv homeh.stat)
+      :+  %uptime
+          %s
+      uptime.stat
+      :+  %life
+          %s
+      ?~(leef.stat '' (scot %ud u.+.leef.stat))
+      :+  %rift
+          %s
+      ?~(reef.stat '' (scot %ud u.+.reef.stat))
+      :+  %olife
+          %s
+      ?~(oleef.stat '' (scot %ud u.+.leef.stat))
+      :+  %orift
+          %s
+      ?~(oreef.stat '' (scot %ud u.+.reef.stat))
+  ==
 --
