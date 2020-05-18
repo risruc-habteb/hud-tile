@@ -42,7 +42,7 @@ export default class hudTile extends Component {
     className={"pa2 w-100 h-100 b--black b--gray1-d ba " +
       "bg-white bg-gray0-d black white-d"}>
         <img className="invert-d"
-        src='/~hud/img/hud-.png'
+        src='/~hud/img/hud.png'
         width={20}
         height={14} />
         <p className="f9 absolute"

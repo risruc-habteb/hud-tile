@@ -19296,7 +19296,7 @@
                 className: "pa2 w-100 h-100 b--black b--gray1-d ba " +
                   "bg-white bg-gray0-d black white-d", __self: this, __source: {fileName: _jsxFileName, lineNumber: 41}}
                     , react.createElement('img', { className: "invert-d",
-                    src: "/~hud/img/hud-.png",
+                    src: "/~hud/img/hud.png",
                     width: 20,
                     height: 14, __self: this, __source: {fileName: _jsxFileName, lineNumber: 44}} )
                     , react.createElement('p', { className: "f9 absolute" ,
