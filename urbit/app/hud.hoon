@@ -137,16 +137,19 @@
         %base  .^(@uv %cz ~[o ~.base n])
         %home  .^(@uv %cz ~[o ~.home n])
     ==
+
   ++  poke-lr
     |=  [action=?(%life %rift) p=@p]
     =/  n=@ta  (scot %da now.bol)
     ::  lol pp
     ::
     =/  o=@ta  (scot %p p)
+    =/  me=@ta  (scot %p our.bol)
     ?-  action
-        %life  .^((unit @ud) %j `path`~[o ~.lyfe n o])
-        %rift  .^((unit @ud) %j `path`~[o ~.ryft n o])
+        %life  .^((unit @ud) %j `path`~[me ~.lyfe n o])
+        %rift  .^((unit @ud) %j `path`~[me ~.ryft n o])
     ==
+
   ++  poke-json
     |=  jon=json
     =,  dejs:format
